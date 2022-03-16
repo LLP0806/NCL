@@ -1,0 +1,119 @@
+# Sample .bashrc for SuSE Linux
+# Copyright (c) SuSE GmbH Nuernberg
+
+# There are 3 different types of shells in bash: the login shell, normal shell
+# and interactive shell. Login shells read ~/.profile and interactive shells
+# read ~/.bashrc; in our setup, /etc/profile sources ~/.bashrc - thus all
+# settings made here will also take effect in a login shell.
+#
+# NOTE: It is recommended to make language settings in ~/.profile rather than
+# here, since multilingual X sessions would not work properly if LANG is over-
+# ridden in every subshell.
+
+# Some applications read the EDITOR variable to determine your favourite text
+# editor. So uncomment the line below and enter the editor of your choice :-)
+#export EDITOR=/usr/bin/vim
+#export EDITOR=/usr/bin/mcedit
+
+# For some news readers it makes sense to specify the NEWSSERVER variable here
+#export NEWSSERVER=your.news.server
+
+# If you want to use a Palm device with Linux, uncomment the two lines below.
+# For some (older) Palm Pilots, you might need to set a lower baud rate
+# e.g. 57600 or 38400; lowest is 9600 (very slow!)
+#
+#export PILOTPORT=/dev/pilot
+#export PILOTRATE=115200
+
+test -s ~/.alias && . ~/.alias || true
+
+#color ls
+export LS_OPTIONS='--color=auto'
+alias ls='ls --color=auto'
+alias ll='ls --color=auto -l'
+alias la='ls --color=auto -lA'
+alias grep='grep --color=auto'
+alias cdb="cd /athenaData1/lpluo"
+alias iset13='ssh lluo@iset13.ncat.edu'
+alias iset7='ssh lpluo@iset7.ncat.edu'
+alias cderl='cd /athenaData1/lpluo/run_jing_fromChinool_smb_part2/plots_1year_test_resolution/for_2018/for_paper_ERL/'
+#source ~/compilervars.sh intel64
+
+# MPI2 Specifics
+
+export MPI2=/opt/mpich2
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}"":$MPI2/lib:/usr/local/lib64"
+export MPI2INC=$MPI2/include
+export MPI2EXEC=$MPI2/bin
+export PATH=/opt/mpich2/bin:$PATH
+
+# End of MPI2 ENV setting
+
+# WRF environment variable settings
+export NETCDF=/opt/netcdf3
+export PATH=$PATH:/opt/netcdf3/bin
+#export PATH=$PATH:/opt/netcdf3/bin:/opt/ncl_6.1.2/bin
+#export NCARG_ROOT=/opt/ncl_6.1.2
+export NCARG_ROOT=/home/lpluo/software/ncl_6.5
+#export NCARG_ROOT=/opt/ncl-6.3.0
+export PATH=$PATH:/opt/netcdf3/bin:/opt/ncl-6.3.0/bin
+export NCARG_INCLUDE=$NCARG_ROOT/include
+export NCARG_LIB=$NCARG_ROOT/lib
+export NCARG_BIN=$NCARG_ROOT/bin
+export PATH=$NCARG_ROOT/bin:$PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$NCARG_LIB
+
+###export tNCLEXEC=$NCARG_ROOT/bin
+#export WRFROOT=/opt/wrf/wrf3.2-pgi9.0-4/WRFV3-basic
+#export WPSROOT=/opt/wrf/wrf3.2-pgi9.0-4/WPS
+#export ARWPOST=/opt/wrf/wrf3.2-pgi9.0-4/ARWpost
+#export NMMPOST=/opt/wrf3-pgi724/wrfpostproc_v2.2.2
+export JASPEREXEC=/opt/pkg/bin
+export JASPERLIB=/opt/pkg/lib
+export JASPERINC=/opt/pkg/include/
+export LIBPNGEXEC=/opt/pkg/bin
+export LIBPNGLIB=/opt/pkg/lib
+export LIBPNGINC=/opt/pkg/include/
+export ZLIBINC=/opt/pkg/include
+export ZLIBLIB=/opt/pkg/lib
+export SZIPINC=/opt/pkg/include
+export SZIPLIB=/opt/pkg/lib
+export BUFR=1
+export CRTM=1
+export WRFPLUS_DIR=/home/galen/work/WRFPLUSV3
+export WRFIO_NCD_LARGE_FILE_SUPPORT=1
+#export GFORTRAN_CONVERT_UNIT="little_endian:94-99"
+# End of WRF ENV setting
+
+# STMAS ENV settings
+export LAPS_SRC_ROOT=/data/stmas/src/laps-0-46-13
+export LAPSINSTALLROOT=/data/stmas/laps-0-46-13
+export LAPS_DATA_ROOT=/home/galen/tornado
+# End of STMAS ENV settings
+
+# GrADS scripts location variable
+export PATH=$PATH:/opt/grads-2.0.1.oga.1/Contents
+# End of GrADS scripts variables
+
+#RIP4
+export RIP_ROOT=/data/RIP4
+export PATH=$PATH:/data/RIP4
+
+export PATH=$PATH:/home/lpluo/anaconda3/bin
+#export PATH=$PATH:/home/lpluo/software/bin
+# added by Anaconda3 2018.12 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/lpluo/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/home/lpluo/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/lpluo/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/home/lpluo/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<
